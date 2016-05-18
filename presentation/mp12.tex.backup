@@ -1,0 +1,125 @@
+\documentclass{beamer}
+% example theorem blocks itemize \column{.45\textwidth} enumerate
+\mode<presentation> {
+\usetheme{Luebeck}%\usetheme{Madrid}
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{color}
+\usepackage{fancyvrb}
+
+\newcommand\verbbf[1]{\textcolor[rgb]{0,0,1}{\textbf{#1}}}
+
+\title[mp1\&mp2 experience share]{experience on mp1\&mp2} % The short title appears at the bottom of every slide, the full title is only on the title page
+\author{Yihui He} % Your name
+\institute[ ] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+   % Your institution for the title page
+\medskip
+\textit{yihuihe@foxmail.com} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+% mp1
+% tricks
+% new model
+% 
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\section{mp1}
+%------------------------------------------------
+\subsection{tricks}
+\begin{frame}
+\frametitle{Choosing number of hidden neurons}
+\begin{table}
+\caption{top accuracy}
+\label{top-accuracy}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{1}{|p{1cm}|}{\centering hidden \\ neurons}
+&\multicolumn{1}{|p{1cm}|}{\centering learning \\ rate}
+&\multicolumn{1}{|p{2cm}|}{\centering regularization \\ strength}
+&\multicolumn{1}{|p{1.5cm}|}{\centering validation \\ accuracy}\\
+\hline
+350 & 0.001    & 0.05   & 0.516 \\
+\hline
+400 & 0.001    & 0.005  & 0.509 \\
+			\hline
+250 & 0.001    & 0.0005 & 0.505 \\
+			\hline
+250 & 0.001    & 0.05   & 0.501 \\
+			\hline
+150 & 0.001    & 0.005  & 0.5   \\
+			\hline
+500 & 0.001    & 0.05   & 0.5  \\
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Update methods affect converge rate}
+1000 iterations, batch size 100
+\begin{table}
+\centering
+\caption{Differences between update methods}
+\label{Differences between update methods}
+\begin{tabular}{lllll}
+accuracy & Train & Validation & Test &  \\
+SGD      & .27   & .28        & .28  &  \\
+Momentum & .49   & .472       & .458 &  \\
+Nesterov & .471  & .452       & .461 &  \\
+RMSprop  & .477  & .458       & .475 & 
+\end{tabular}
+\end{table}
+\end{frame}
+%------------------------------------------------
+\begin{frame}[fragile]
+ \frametitle{dropout}
+ Accuracy improves about 3\%. \\
+ Only need to change one line in code:
+  \begin{Verbatim}[commandchars=\\\{\}]
+  a2=np.maximum(X.dot(W1)+b1,0)
+  \verbbf{a2*=(np.random.randn(*a2.shape)<p)/p}
+  scores=a2.dot(W2)+b2 
+  \end{Verbatim}
+p  : dropout rate. \\
+a2 : activation in the second layer.
+\end{frame}
+%------------------------------------------------
+\subsection{new model}
+\begin{frame}
+\frametitle{preprocessing}
+\begin{enumerate}
+ \item PCA whitening
+ \item Kmeans
+ \item plug in our two-layer neural network
+\end{enumerate}
+\footnotetext[1]{TEXT FOR FIRST FOOTNOTE HERE}
+
+\end{frame}
+%------------------------------------------------
+\section{mp2}
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

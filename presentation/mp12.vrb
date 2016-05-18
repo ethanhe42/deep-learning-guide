@@ -1,0 +1,24 @@
+\frametitle{parameters on each layers}
+\begin{columns}
+\begin{column}{.5\textwidth}
+ A commonly used VGGnet:
+\begin{verbatim}
+ conv3-64  x 2 : 38,720
+ conv3-128 x 2 : 221,440
+ conv3-256 x 3 : 1,475,328
+ conv3-512 x 3 : 5,899,776
+ conv3-512 x 3 : 7,079,424
+ fc1           : 102,764,544
+ fc2           : 16,781,312
+ fc3           : 4,097,000
+ TOTAL         : 138,357,544
+\end{verbatim}
+\end{column}
+\begin{column}{.5\textwidth}
+Notice that 74\% parameters are from fc1, however, actual accuracy improvement is from conv layers. Residual nerual network, instead, uses all convolution layers
+ and a global average pooling layer at the end.
+\end{column}
+\end{columns}
+{\color{white}{ a}}\\
+{\color{white}{ a}}\\
+\cite{springenberg2014striving},
