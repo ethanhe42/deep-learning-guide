@@ -6,7 +6,7 @@
 %\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
 %\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
-\usepackage{color}\usepackage{fancyvrb}\usepackage{listings}\usepackage{graphicx}\usepackage{booktabs} 
+\usepackage{color}\usepackage{fancyvrb}\usepackage{listings}\usepackage{graphicx}\usepackage{booktabs}\usepackage{hyperref}
 % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage[style=verbose]{biblatex}
 \bibliography{mp12}
@@ -81,7 +81,7 @@
 \begin{itemize}
 \item determine ralation\footnote{stanford cs231n} between parameter and backpropagation error:
 linear, $\theta \propto \delta$ or exponential, $log(\theta)\propto \delta$
-\item run a grid search on part of our big dataset
+\item run a grid search(or random search) on a small part of our big dataset
 \end{itemize}
 \begin{lstlisting}[language=python]
 for hidden_neurons in range(150,600,50):
@@ -89,9 +89,7 @@ for hidden_neurons in range(150,600,50):
     for norm in [0.5*10**i for i in range(-3,3)]:
       [loss_history,accuracy]=\
       train(small_dataset,
-            hidden_neurons,
-            learning_rate,
-            norm)
+            hidden_neurons,learning_rate,norm)
       # dump loss, accuracy history for each setting
       # append highest accuracy of each setting to a .csv
 \end{lstlisting}
@@ -170,6 +168,9 @@ Significance can't be seen from our two layers shallow neural net.\\
 However, initialization is super important in mp2(deep neural net).
 \end{frame}
 
+\begin{frame}
+\begin{huge}\centerline{questions about these tricks?}\end{huge}
+\end{frame}
 %------------------------------------------------
 \subsection{new model}
 \begin{frame}
@@ -199,11 +200,6 @@ The new model I used benefit from two preprocessing techniques:
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{architecture}
-A picture here
-\end{frame}
-%------------------------------------------------
-\begin{frame}
 \frametitle{high level description}
 Learn a feature representation:
 \begin{enumerate}
@@ -220,14 +216,27 @@ Given the learned feature mapping, we can then perform feature extraction:
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{PCAwhitening}
-\includegraphics[width=\textwidth]{whiten.png}
-
+\frametitle{steps}
+\includegraphics[width=\textwidth]{kmeans.png} 
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Kmeans}
-\includegraphics[width=\textwidth]{kmeans.png} 
+\frametitle{PCAwhitening visualize}
+\includegraphics[width=\textwidth]{pca.jpeg}
+Use PCAwhitening without dimention reduction.
+\end{frame}
+\begin{frame}
+\frametitle{Kmeans visualize}
+\includegraphics[width=.8\textwidth]{kmeans.jpg}\\
+Select 1600 clusters
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{PCAwhitening effect on Kmeans}
+Some cluster centroids
+\includegraphics[width=\textwidth]{whiten.png}
+
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -267,7 +276,9 @@ After fix this bug, accuracy increases to 77\%. Much closer. \\ \phantom
 A Huge difference! Mean image substraction is important.
 \end{frame}
 
-
+\begin{frame}
+\begin{huge}\centerline{questions on PCAwhitening and Kmeans?}\end{huge}
+\end{frame}
 \section{mp2}
 %------------------------------------------------
 \begin{frame}
@@ -345,7 +356,13 @@ To my knowledge, I found these possible way to improve accuracy:
 
 
 \begin{frame}
-\frametitle{XNOR net}
+\frametitle{what is XNOR net?}
+\includegraphics[width=\textwidth]{binary.png}\\
+$\sigma(x)$, activation function
+\end{frame}
+
+\begin{frame}
+\frametitle{XNOR net speed}
 \includegraphics[width=\textwidth]{xnornet.png}\\
 \begin{block}
 {How fast is it?}
@@ -359,8 +376,19 @@ Using XNOR net, it will only spends 1 hour.
 \includegraphics[width=.8\textwidth]{mxnet.png}
 \end{frame}
 
+
 \begin{frame}
-\frametitle{do deep net really need to be deep}
+\frametitle{what is mimic learning, basic idea}
+With a high accuracy teacher model,\\
+we not only tell the student neural network which label is true or wrong(0,1)\\
+also tell the student neural network some classes are close to each other and some are not.\\
+\begin{example}
+In CIFAR10, truck and car are in different classes, however, they share some common features. So when there's a car in the image, truck's probability is also high. Teacher model helps student model jointly learn these two concepts.
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{what is mimic learning, details}
 High level overview:
 \begin{enumerate}
 \item train a state-of-the-art neural network
@@ -371,6 +399,8 @@ High level overview:
 \item fine tuning
 \end{enumerate}
 \end{frame}
+
+
 \begin{frame}
 \frametitle{result from paper}
 \includegraphics[width=.8\textwidth]{mimic.png}
@@ -383,6 +413,8 @@ Learn $f(x)-x$ instead of $f(x)$.
 \end{frame}
 %--------------------------------------------------------------
 \subsection{delving into one model}
+
+
 \begin{frame}
 \frametitle{residual neural network}
 The only two differences between residual neural network and ConvNet:
@@ -394,43 +426,23 @@ The only two differences between residual neural network and ConvNet:
 \end{frame}
 
 \begin{frame}
-\frametitle{residual module}
-\includegraphics[width=.8\textwidth]{resnet.png}
+\begin{columns}
+\begin{column}{.1\textwidth}
+\includegraphics[scale=.35]{resArch.png}
+\end{column}
+\begin{column}{.5\textwidth}
+\includegraphics[width=1.3\textwidth]{resnet.png}
+\end{column}
+\end{columns}
 \end{frame}
+
 
 \begin{frame}
-\frametitle{architecture comparison}
-  \begin{table}[!hbt]
-  \centering
-  \caption{Differences between three archectures}
-  \begin{tabular}{lllll}
-  & AlexNet & Kmeans & ResNet & \\
-  parameters    & 1M   & .4M & .13M & \\
-  Layers      & 7 & 3 & 14 \\
-  learning rate & $.1$   & $5\times10^{-4}$ & $.1$ &  \\  
-  regularization & L2  & Dropout,.3       & None &  \\
-  epoch & 10  & 140       & 18 &  \\    		
-  Batch size & 128  & 128       & 256 &  \\    		
-  Time(min)  & 180  & 80       & 180 &\\
-  CIFAR10 Acc & 82\% & 75\% & 84\% \\
-  Train accuracy  & 90\%  & 80\%       & 86\% & \\
-  Test  & 56\%  & 56\%       & 63\% &     		
-  \end{tabular}
-  \end{table}
-
+\frametitle{traditional convolutional neural network}
+\includegraphics[width=\textwidth]{Alex.jpg}
 \end{frame}
 
-\begin{frame}
-\frametitle{why residual neural network more efficient?}
-\begin{enumerate}
-\item no hidden layer, only a fully connected layer from conv layer to softmax.
-\item Less trainable parameters than neural networks that have the same depth.
-\item shortcut module allows error $\delta$ directly pass to previous layers, 
-instead of going through each layer. 
-It implicitly makes a deeper network shallower, so it won't suffer much from gradient vanishing and exploding.
-It makes training faster.
-\end{enumerate}
-\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{parameters on each layers}
 \begin{columns}
@@ -460,7 +472,49 @@ Notice that 74\% parameters are from fc1, however, actual accuracy improvement i
 
 
 \begin{frame}
-\Huge{\centerline{The End}}
+\frametitle{architecture comparison}
+  \begin{table}[!hbt]
+  \centering
+  \caption{Differences between three archectures}
+  \begin{tabular}{lllll}
+  & AlexNet & Kmeans & ResNet & \\
+  parameters    & 1M   & .4M & .13M & \\
+  Layers      & 7 & 3 & 14 \\
+  learning rate & $.1$   & $5\times10^{-4}$ & $.1$ &  \\  
+  regularization & L2  & Dropout,.3       & None &  \\
+  epoch & 10  & 140       & 18 &  \\    		
+  Batch size & 128  & 128       & 256 &  \\    		
+  Time(min)  & 180  & 80       & 180 &\\
+  CIFAR10 Acc & 82\% & 75\% & 84\% \\
+  Train accuracy  & 90\%  & 80\%       & 86\% & \\
+  Test  & 56\%  & 56\%       & 63\% &     		
+  \end{tabular}
+  \end{table}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{why residual neural network more efficient?}
+\begin{enumerate}
+\item Less trainable parameters than neural networks that have the same depth.
+\item Lower layer response.
+\item shortcut module allows error $\delta$ directly pass to previous layers, 
+instead of going through each layer. 
+It implicitly makes a deeper network shallower, so it won't suffer much from gradient vanishing and exploding.
+It makes training faster.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+Code, report and papers can be access via github:\\
+mp1\\
+\href{https://github.com/yihui-he/Single-Layer-neural-network-with-PCAwhitening-Kmeans}{https://github.com/yihui-he/Single-Layer-neural-network-with-PCAwhitening-Kmeans}\\
+mp2\\
+\href{https://github.com/yihui-he/Residual-neural-network}{https://github.com/yihui-he/Residual-neural-network}
+\end{frame}
+
+\begin{frame}
+\Huge{\centerline{questions?}}
 \end{frame}
 %----------------------------------------------------------------------------------------
 

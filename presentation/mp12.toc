@@ -6,12 +6,12 @@
 \defcounter {refsection}{0}\relax 
 \beamer@subsectionintoc {1}{1}{tricks}{4}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@subsectionintoc {1}{2}{new model}{9}{0}{1}
+\beamer@subsectionintoc {1}{2}{new model}{10}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{mp2}{19}{0}{2}
+\beamer@sectionintoc {2}{mp2}{22}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@subsectionintoc {2}{1}{tricks}{21}{0}{2}
+\beamer@subsectionintoc {2}{1}{tricks}{24}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@subsectionintoc {2}{2}{choosing from different models}{26}{0}{2}
+\beamer@subsectionintoc {2}{2}{choosing from different models}{29}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@subsectionintoc {2}{3}{delving into one model}{32}{0}{2}
+\beamer@subsectionintoc {2}{3}{delving into one model}{37}{0}{2}

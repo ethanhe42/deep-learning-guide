@@ -1,15 +1,15 @@
 [0] Config.pm:340> INFO - This is Biber 2.4
 [0] Config.pm:343> INFO - Logfile is 'mp12.blg'
-[25] biber:290> INFO - === Tue May 17, 2016, 22:31:55
-[35] Biber.pm:347> INFO - Reading 'mp12.bcf'
-[98] Biber.pm:741> INFO - Found 7 citekeys in bib section 0
-[106] Biber.pm:3150> INFO - Processing section 0
-[133] Biber.pm:3307> INFO - Looking for bibtex format file 'mp12.bib' for section 0
-[134] bibtex.pm:1124> INFO - Decoding LaTeX character macros into UTF-8
-[135] bibtex.pm:985> INFO - Found BibTeX data source 'mp12.bib'
-[280] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[281] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[281] Biber.pm:3027> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
-[281] Biber.pm:3031> INFO - No sort tailoring available for locale 'en-US'
-[297] bbl.pm:519> INFO - Writing 'mp12.bbl' with encoding 'ascii'
-[300] bbl.pm:615> INFO - Output to mp12.bbl
+[29] biber:290> INFO - === Wed May 18, 2016, 01:27:35
+[41] Biber.pm:347> INFO - Reading 'mp12.bcf'
+[109] Biber.pm:741> INFO - Found 7 citekeys in bib section 0
+[117] Biber.pm:3150> INFO - Processing section 0
+[146] Biber.pm:3307> INFO - Looking for bibtex format file 'mp12.bib' for section 0
+[147] bibtex.pm:1124> INFO - Decoding LaTeX character macros into UTF-8
+[147] bibtex.pm:985> INFO - Found BibTeX data source 'mp12.bib'
+[250] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[250] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[250] Biber.pm:3027> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
+[250] Biber.pm:3031> INFO - No sort tailoring available for locale 'en-US'
+[260] bbl.pm:519> INFO - Writing 'mp12.bbl' with encoding 'ascii'
+[261] bbl.pm:615> INFO - Output to mp12.bbl
