@@ -14,4 +14,4 @@
 \defcounter {refsection}{0}\relax 
 \beamer@subsectionintoc {2}{2}{choosing from different models}{29}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@subsectionintoc {2}{3}{delving into one model}{37}{0}{2}
+\beamer@subsectionintoc {2}{3}{delving into one model}{36}{0}{2}
